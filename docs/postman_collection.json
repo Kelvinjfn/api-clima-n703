@@ -1,0 +1,578 @@
+{
+  "info": {
+    "name": "API de Agregação de Dados Climáticos e Geográficos (N703)",
+    "description": "Coleção de testes da API de Agregação de Dados Climáticos e Geográficos (N703). A API combina duas bases de dados públicas: IBGE (estados e municípios) e Open-Meteo (cidade, coordenadas e clima).\n\nComo usar: 1) ligue a API com 'python src/app.py'; 2) execute os pedidos um a um ou use Run collection para rodar os 16 de uma vez. A variável baseUrl já aponta para http://localhost:3000. Todos os pedidos usam o método GET.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health check",
+      "item": [
+        {
+          "name": "Health - sucesso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"status = healthy\", function () { pm.expect(pm.response.json().status).to.eql(\"healthy\"); });",
+                  "pm.test(\"versao = 1.0.0\", function () { pm.expect(pm.response.json().versao).to.eql(\"1.0.0\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "health"
+              ]
+            },
+            "description": "Verifica se a API está no ar.\n\nResultado esperado: HTTP 200 com status \"healthy\", versão \"1.0.0\" e timestamp.\n\nVerificações automáticas: status 200, resposta em JSON, status e versão corretos."
+          }
+        }
+      ],
+      "description": "Verifica se a API está no ar. Método GET."
+    },
+    {
+      "name": "Clima por cidade",
+      "item": [
+        {
+          "name": "Clima - Fortaleza",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"estado = CE\", function () { pm.expect(pm.response.json().estado).to.eql(\"CE\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/Fortaleza",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "Fortaleza"
+              ]
+            },
+            "description": "Consulta o clima de Fortaleza. A API encontra a cidade pelo nome (Open-Meteo), obtém as coordenadas, busca a previsão de hoje e converte o estado em sigla pelo IBGE.\n\nResultado esperado: HTTP 200, com nome, estado \"CE\", coordenadas, temperaturas mínima e máxima, condição do tempo e consultado_em.\n\nVerificações automáticas: status 200, resposta em JSON e sigla do estado correta."
+          }
+        },
+        {
+          "name": "Clima - São Paulo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"estado = SP\", function () { pm.expect(pm.response.json().estado).to.eql(\"SP\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/S%C3%A3o%20Paulo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "S%C3%A3o%20Paulo"
+              ]
+            },
+            "description": "Consulta o clima de São Paulo. A API encontra a cidade pelo nome (Open-Meteo), obtém as coordenadas, busca a previsão de hoje e converte o estado em sigla pelo IBGE.\n\nResultado esperado: HTTP 200, com nome, estado \"SP\", coordenadas, temperaturas mínima e máxima, condição do tempo e consultado_em.\n\nVerificações automáticas: status 200, resposta em JSON e sigla do estado correta."
+          }
+        },
+        {
+          "name": "Clima - Rio de Janeiro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"estado = RJ\", function () { pm.expect(pm.response.json().estado).to.eql(\"RJ\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/Rio%20de%20Janeiro",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "Rio%20de%20Janeiro"
+              ]
+            },
+            "description": "Consulta o clima de Rio de Janeiro. A API encontra a cidade pelo nome (Open-Meteo), obtém as coordenadas, busca a previsão de hoje e converte o estado em sigla pelo IBGE.\n\nResultado esperado: HTTP 200, com nome, estado \"RJ\", coordenadas, temperaturas mínima e máxima, condição do tempo e consultado_em.\n\nVerificações automáticas: status 200, resposta em JSON e sigla do estado correta."
+          }
+        },
+        {
+          "name": "Clima - Brasília",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"estado = DF\", function () { pm.expect(pm.response.json().estado).to.eql(\"DF\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/Bras%C3%ADlia",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "Bras%C3%ADlia"
+              ]
+            },
+            "description": "Consulta o clima de Brasília. A API encontra a cidade pelo nome (Open-Meteo), obtém as coordenadas, busca a previsão de hoje e converte o estado em sigla pelo IBGE.\n\nResultado esperado: HTTP 200, com nome, estado \"DF\", coordenadas, temperaturas mínima e máxima, condição do tempo e consultado_em.\n\nVerificações automáticas: status 200, resposta em JSON e sigla do estado correta."
+          }
+        },
+        {
+          "name": "Clima - Salvador",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"estado = BA\", function () { pm.expect(pm.response.json().estado).to.eql(\"BA\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/Salvador",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "Salvador"
+              ]
+            },
+            "description": "Consulta o clima de Salvador. A API encontra a cidade pelo nome (Open-Meteo), obtém as coordenadas, busca a previsão de hoje e converte o estado em sigla pelo IBGE.\n\nResultado esperado: HTTP 200, com nome, estado \"BA\", coordenadas, temperaturas mínima e máxima, condição do tempo e consultado_em.\n\nVerificações automáticas: status 200, resposta em JSON e sigla do estado correta."
+          }
+        },
+        {
+          "name": "Clima - Belo Horizonte",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"estado = MG\", function () { pm.expect(pm.response.json().estado).to.eql(\"MG\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/Belo%20Horizonte",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "Belo%20Horizonte"
+              ]
+            },
+            "description": "Consulta o clima de Belo Horizonte. A API encontra a cidade pelo nome (Open-Meteo), obtém as coordenadas, busca a previsão de hoje e converte o estado em sigla pelo IBGE.\n\nResultado esperado: HTTP 200, com nome, estado \"MG\", coordenadas, temperaturas mínima e máxima, condição do tempo e consultado_em.\n\nVerificações automáticas: status 200, resposta em JSON e sigla do estado correta."
+          }
+        },
+        {
+          "name": "Clima - Curitiba",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"estado = PR\", function () { pm.expect(pm.response.json().estado).to.eql(\"PR\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/Curitiba",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "Curitiba"
+              ]
+            },
+            "description": "Consulta o clima de Curitiba. A API encontra a cidade pelo nome (Open-Meteo), obtém as coordenadas, busca a previsão de hoje e converte o estado em sigla pelo IBGE.\n\nResultado esperado: HTTP 200, com nome, estado \"PR\", coordenadas, temperaturas mínima e máxima, condição do tempo e consultado_em.\n\nVerificações automáticas: status 200, resposta em JSON e sigla do estado correta."
+          }
+        },
+        {
+          "name": "Clima - Manaus",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"estado = AM\", function () { pm.expect(pm.response.json().estado).to.eql(\"AM\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/Manaus",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "Manaus"
+              ]
+            },
+            "description": "Consulta o clima de Manaus. A API encontra a cidade pelo nome (Open-Meteo), obtém as coordenadas, busca a previsão de hoje e converte o estado em sigla pelo IBGE.\n\nResultado esperado: HTTP 200, com nome, estado \"AM\", coordenadas, temperaturas mínima e máxima, condição do tempo e consultado_em.\n\nVerificações automáticas: status 200, resposta em JSON e sigla do estado correta."
+          }
+        },
+        {
+          "name": "Clima - erro 404 (cidade não encontrada)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"codigo = CIDADE_NAO_ENCONTRADA\", function () { pm.expect(pm.response.json().codigo).to.eql(\"CIDADE_NAO_ENCONTRADA\"); });",
+                  "pm.test(\"nome_informado = CidadeInexistente\", function () { pm.expect(pm.response.json().nome_informado).to.eql(\"CidadeInexistente\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/CidadeInexistente",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "CidadeInexistente"
+              ]
+            },
+            "description": "Consulta o clima de uma cidade que não existe (\"CidadeInexistente\").\n\nResultado esperado: HTTP 404 com codigo CIDADE_NAO_ENCONTRADA e o nome informado na resposta.\n\nVerificações automáticas: status 404, resposta em JSON, código de erro e nome informado."
+          }
+        },
+        {
+          "name": "Clima - erro 400 (nome inválido)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () { pm.response.to.have.status(400); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"codigo = NOME_INVALIDO\", function () { pm.expect(pm.response.json().codigo).to.eql(\"NOME_INVALIDO\"); });",
+                  "pm.test(\"nome_informado = X\", function () { pm.expect(pm.response.json().nome_informado).to.eql(\"X\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/clima/X",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "clima",
+                "X"
+              ]
+            },
+            "description": "Consulta o clima com um nome de apenas 1 caractere (\"X\"). A regra exige pelo menos 2 caracteres.\n\nResultado esperado: HTTP 400 com codigo NOME_INVALIDO e o nome informado na resposta.\n\nVerificações automáticas: status 400, resposta em JSON, código de erro e nome informado."
+          }
+        }
+      ],
+      "description": "Endpoint GET /api/v1/clima/{nome_cidade}. Combina dados do Open-Meteo (cidade, coordenadas e clima) com a sigla do estado vinda do IBGE. Inclui as 8 cidades de teste da proposta e os erros 404 e 400."
+    },
+    {
+      "name": "Cidades por estado",
+      "item": [
+        {
+          "name": "Cidades - CE com limite 5",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"uf = CE\", function () { pm.expect(pm.response.json().uf).to.eql(\"CE\"); });",
+                  "pm.test(\"quantidade_retornada = 5\", function () { pm.expect(pm.response.json().quantidade_retornada).to.eql(5); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/cidades/CE?limite=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cidades",
+                "CE"
+              ],
+              "query": [
+                {
+                  "key": "limite",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "Lista as cidades do Ceará (dados do IBGE) usando o parâmetro opcional limite=5.\n\nResultado esperado: HTTP 200 com uf \"CE\" e exatamente 5 cidades, em ordem alfabética.\n\nVerificações automáticas: status 200, resposta em JSON, uf igual a CE e quantidade_retornada igual a 5."
+          }
+        },
+        {
+          "name": "Cidades - CE com limite padrão (10)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"quantidade_retornada = 10\", function () { pm.expect(pm.response.json().quantidade_retornada).to.eql(10); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/cidades/CE",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cidades",
+                "CE"
+              ]
+            },
+            "description": "Lista as cidades do Ceará sem informar o parâmetro limite. Nesse caso vale o padrão de 10.\n\nResultado esperado: HTTP 200 com 10 cidades.\n\nVerificações automáticas: status 200, resposta em JSON e quantidade_retornada igual a 10."
+          }
+        },
+        {
+          "name": "Cidades - erro 404 (UF não encontrada)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", function () { pm.response.to.have.status(404); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"codigo = UF_NAO_ENCONTRADA\", function () { pm.expect(pm.response.json().codigo).to.eql(\"UF_NAO_ENCONTRADA\"); });",
+                  "pm.test(\"sigla_uf_informada = XX\", function () { pm.expect(pm.response.json().sigla_uf_informada).to.eql(\"XX\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/cidades/XX",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cidades",
+                "XX"
+              ]
+            },
+            "description": "Lista as cidades de uma sigla que tem 2 letras, mas não é um estado (\"XX\").\n\nResultado esperado: HTTP 404 com codigo UF_NAO_ENCONTRADA e a sigla informada na resposta.\n\nVerificações automáticas: status 404, resposta em JSON, código de erro e sigla informada."
+          }
+        },
+        {
+          "name": "Cidades - erro 400 (sigla inválida)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () { pm.response.to.have.status(400); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"codigo = SIGLA_UF_INVALIDA\", function () { pm.expect(pm.response.json().codigo).to.eql(\"SIGLA_UF_INVALIDA\"); });",
+                  "pm.test(\"sigla_uf_informada = ceara\", function () { pm.expect(pm.response.json().sigla_uf_informada).to.eql(\"ceara\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/cidades/ceara",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cidades",
+                "ceara"
+              ]
+            },
+            "description": "Lista as cidades usando um nome por extenso (\"ceara\") no lugar da sigla. A regra exige exatamente 2 letras.\n\nResultado esperado: HTTP 400 com codigo SIGLA_UF_INVALIDA e a sigla informada na resposta.\n\nVerificações automáticas: status 400, resposta em JSON, código de erro e sigla informada."
+          }
+        },
+        {
+          "name": "Cidades - erro 400 (limite inválido)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () { pm.response.to.have.status(400); });",
+                  "pm.test(\"Resposta em JSON\", function () { pm.response.to.be.json; });",
+                  "pm.test(\"codigo = LIMITE_INVALIDO\", function () { pm.expect(pm.response.json().codigo).to.eql(\"LIMITE_INVALIDO\"); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/cidades/CE?limite=500",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cidades",
+                "CE"
+              ],
+              "query": [
+                {
+                  "key": "limite",
+                  "value": "500"
+                }
+              ]
+            },
+            "description": "Lista as cidades do Ceará com limite=500. O limite deve ser um inteiro entre 1 e 100.\n\nResultado esperado: HTTP 400 com codigo LIMITE_INVALIDO.\n\nVerificações automáticas: status 400, resposta em JSON e código de erro."
+          }
+        }
+      ],
+      "description": "Endpoint GET /api/v1/cidades/{sigla_uf}?limite=N. Lista municípios de um estado usando a base do IBGE. Inclui o caso de sucesso com e sem limite e os erros 404 e 400."
+    }
+  ]
+}
