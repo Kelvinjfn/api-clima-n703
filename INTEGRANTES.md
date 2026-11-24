@@ -3,3 +3,4 @@
 | Nome Completo  | Matrícula | Papel                 |
 |----------------|-----------|-----------------------|
 | Kelvin Jonathas Freitas do Nascimento | 2415481 | Desenvolvedor Backend e Testes |
+| Ana Raquel Miranda Nunes | 2425037 | |
