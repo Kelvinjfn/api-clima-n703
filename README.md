@@ -50,17 +50,6 @@ O IBGE entra na etapa 6, enriquecendo o resultado com a sigla oficial do estado.
 
 Veja [INTEGRANTES.md](INTEGRANTES.md).
 
-### Contribuições dos integrantes
-
-**Kelvin Jonathas Freitas do Nascimento (2415481)**
-
-- Leu e conferiu a proposta da atividade seção por seção, verificando se o projeto atendia a cada requisito.
-- Escolheu a linguagem do projeto (Python) e configurou o ambiente no Windows.
-- Executou a API e os testes automatizados no próprio computador e organizou as pastas do repositório
-  conforme a estrutura exigida.
-- Testou todos os endpoints no navegador e no Postman, importando e executando a coleção, e analisou os
-  resultados, incluindo casos de erro e nomes de cidade digitados de formas diferentes.
-
 ## Tecnologias
 
 - **Python** (desenvolvido com a versão 3.12; requer 3.10 ou superior)
